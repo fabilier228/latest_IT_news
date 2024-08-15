@@ -10,8 +10,9 @@ def sort_stories_by_votes(hnlist):
 def create_custom_hn(links, subtext):
     hn = []
     for inx, item in enumerate(links):
-        title = item.getText()
-        href = item.get("href", None)
+        anchor = item.find('a')
+        title = anchor.getText() if anchor else None
+        href = anchor.get("href") if anchor else None
         vote = subtext[inx].select('.score')
         if len(vote):
             points = int(vote[0].getText().replace(' points', ''))
